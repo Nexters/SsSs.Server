@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nexters.ssss.util.message.errorMsg;
 import com.nexters.ssss.util.JsonUtil;
+import com.nexters.ssss.controller.gateway.service.*;
 
 /**
  * Gatewawy 컨트롤러
@@ -36,6 +37,7 @@ public class GatewayController {
 	public @ResponseBody String GatewayController(@RequestParam Map<String, Object> paramMap, HttpSession session) {
 		String strJsonData = (String)paramMap.get("JSONData");
 		String strTransCd = "";
+		
 		Map<String, Object> mapRslt = new HashMap<String, Object>();
 		Map<String, Object> mapFinalRslt = new HashMap<String, Object>();
 		
@@ -50,7 +52,7 @@ public class GatewayController {
 			
 			//JSONData 파라미터가 있는지 확인, 있으면 JSON 파싱을 시작한다.
 			if(strJsonData==null || "".equals(strJsonData)) {
-				throw new Exception("요청 데이터가 없습니다.");
+				throw new RuntimeException("요청 데이터가 없습니다.");
 			} else {
 				try {
 					joParseData = joUtil.parseJSON(strJsonData);
@@ -67,12 +69,35 @@ public class GatewayController {
 						
 			// 로그인을 한다
 			if("LG0001".equals(strTransCd))  {
-				//효율적으로 클래스를 어떻게 불러올 것인가 연구를 해야할 듯...
-				svcClass = new com.nexters.ssss.controller.gateway.service.LG0001();
-				mapRslt = ((com.nexters.ssss.controller.gateway.service.LG0001)svcClass).execute(joParseData);
+				svcClass = new LG0001();
+				mapRslt = ((LG0001)svcClass).doFirst(session, joParseData);
+			} 
+			
+			// 로그아웃을 한다
+			else if("LG0002".equals(strTransCd))  {
+				svcClass = new LG0002();
+				mapRslt = ((LG0002)svcClass).doFirst(session, joParseData);
+			} 
+			
+			// 현재 로그인된 사용자를 가져와서 출력한다
+			else if("BD0001".equals(strTransCd))  {
+				svcClass = new BD0001();
+				mapRslt = ((BD0001)svcClass).doFirst(session, joParseData);
+			} 
+			
+			// 서비스가 없을 경우에는.. 오류를 
+			else {
+				throw new RuntimeException("존재하는 서비스가 없습니다.");
 			}
 			
 			
+		} 
+		
+		// RuntimeException의 경우 의도적인 오류이기 때문에 정확한 오류 내용을 출력하지 않는다.
+		catch (RuntimeException e) {
+			strTransCd = "ERROR";
+			mapRslt = errorMsg.makeErrorMsg(e.hashCode(), e.getMessage(), "9999");
+			logger.debug("hashCode::"+e.hashCode()+", Message::"+e.getMessage());
 		} catch (Exception e) {
 			strTransCd = "ERROR";
 			mapRslt = errorMsg.makeErrorMsg(e.hashCode(), e.getMessage(), "9999");

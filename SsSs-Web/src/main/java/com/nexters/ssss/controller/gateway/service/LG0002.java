@@ -7,15 +7,15 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
-import com.nexters.ssss.util.sessionUtil;
 import com.nexters.ssss.util.serviceIf;
+import com.nexters.ssss.util.sessionUtil;
 
 /**
- * 로그인
+ * 로그아웃
  * @author limjuhyun
  *
  */
-public class LG0001 implements serviceIf {
+public class LG0002 implements serviceIf {
 
 	private static final boolean isNeedLogin = false;
 	private sessionUtil sessionutil;
@@ -35,7 +35,8 @@ public class LG0001 implements serviceIf {
 	public Map<String, Object> execute(JSONObject reqData) {
 		// TODO Auto-generated method stub
 		Map<String, Object> rsltMap = new HashMap<String, Object>();
-		sessionutil.setUsrId("test");
+		sessionutil.removeUsrId();
+		
 		
 		return rsltMap;
 	}
