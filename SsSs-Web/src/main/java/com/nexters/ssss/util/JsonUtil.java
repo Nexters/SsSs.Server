@@ -24,12 +24,13 @@ public class JsonUtil {
 		JSONObject joPrsingData = null;
 
 		joPrsingData = (JSONObject) JSONValue.parse(strJsonData);
-		
+
 		if(joPrsingData==null) throw new RuntimeException("올바른 JSON 데이터 형식이 아닙니다.");
 		if(joPrsingData.containsKey("_req_svc")==false) throw new RuntimeException("서비스 코드가 없습니다.");
 		if(joPrsingData.containsKey("_req_data")==false) throw new RuntimeException("요청 데이터가 없습니다.");
 		
 		strSvcCd = (String) joPrsingData.get("_req_svc");
+
 
 		return (JSONObject)(((JSONArray) joPrsingData.get("_req_data")).get(0));
 	}

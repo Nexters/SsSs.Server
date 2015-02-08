@@ -31,8 +31,10 @@ public class GatewayController {
 	private static final Logger logger = LoggerFactory.getLogger(GatewayController.class);
 	
 	@Autowired
-	private SqlSession sqlSession;
-
+	private SqlSession sqlsession; 
+	
+	private Object svcClass = null;
+	
 	@RequestMapping(value="/gateway", produces="application/json; charset=utf8")
 	public @ResponseBody String GatewayController(@RequestParam Map<String, Object> paramMap, HttpSession session) {
 		String strJsonData = (String)paramMap.get("JSONData");
@@ -43,7 +45,6 @@ public class GatewayController {
 		
 		JsonUtil joUtil = new JsonUtil();
 		
-		Object svcClass = null;
 		
 		logger.debug("strJsonData::"+strJsonData);
 		
@@ -70,19 +71,19 @@ public class GatewayController {
 			// 로그인을 한다
 			if("LG0001".equals(strTransCd))  {
 				svcClass = new LG0001();
-				mapRslt = ((LG0001)svcClass).doFirst(session, joParseData);
+				mapRslt = ((LG0001)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
 			// 로그아웃을 한다
 			else if("LG0002".equals(strTransCd))  {
 				svcClass = new LG0002();
-				mapRslt = ((LG0002)svcClass).doFirst(session, joParseData);
+				mapRslt = ((LG0002)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
 			// 현재 로그인된 사용자를 가져와서 출력한다
 			else if("BD0001".equals(strTransCd))  {
 				svcClass = new BD0001();
-				mapRslt = ((BD0001)svcClass).doFirst(session, joParseData);
+				mapRslt = ((BD0001)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
 			// 서비스가 없을 경우에는.. 오류를 

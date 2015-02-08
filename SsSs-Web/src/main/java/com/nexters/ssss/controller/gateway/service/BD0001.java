@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 
 import com.nexters.ssss.util.serviceIf;
@@ -16,7 +17,7 @@ public class BD0001 implements serviceIf {
 	private sessionUtil sessionutil;
 
 	@Override
-	public Map<String, Object> doFirst(HttpSession session, JSONObject reqData) {
+	public Map<String, Object> doFirst(HttpSession session, SqlSession sqlsession, JSONObject reqData) {
 		sessionutil = new sessionUtil(session);
 		
 		if(isNeedLogin){
@@ -31,6 +32,7 @@ public class BD0001 implements serviceIf {
 		// TODO Auto-generated method stub
 		Map<String, Object> rsltMap = new HashMap<String, Object>();
 		rsltMap.put("_usr_id", (String)sessionutil.getSession("_usr_id"));
+		
 		
 		
 		return rsltMap;

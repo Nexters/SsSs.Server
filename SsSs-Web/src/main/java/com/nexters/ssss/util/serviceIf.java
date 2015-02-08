@@ -2,7 +2,9 @@ package com.nexters.ssss.util;
 
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -19,7 +21,7 @@ public interface serviceIf {
 	 * @return
 	 */
 	
-	Map<String, Object> doFirst(HttpSession session, JSONObject reqData);
+	Map<String, Object> doFirst(HttpSession session, SqlSession sqlsession, JSONObject reqData);
 	/**
 	 * 비즈니스 로직 부분
 	 * @param reqData 요청 데이터

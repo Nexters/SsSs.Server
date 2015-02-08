@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+  <select id="getUserList" resultType="com.nexters.ssss.db.dto.DTO_USER">
+        SELECT 
+            usr_no
+            , usr_uuid
+            , usr_nn
+            , usr_pushid
+            , alarmyn
+        FROM TN_USER
+    </select>
+</mapper>
