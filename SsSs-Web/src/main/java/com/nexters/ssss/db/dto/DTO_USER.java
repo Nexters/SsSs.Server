@@ -5,12 +5,32 @@ public class DTO_USER {
 	private String usr_uuid;
 	private String usr_nn;
 	private String usr_pushid;
-	private String alaramyn;
+	private String alarmyn;
+	
+	
+	public DTO_USER(){
+		
+	}
+	
+	/*public void operator=(DTO_USER user){
+		this.usr_no=user.getUsr_no();
+		this.usr_uuid=user.getUsr_uuid();
+		this.usr_nn=user.getUsr_nn();
+		this.usr_pushid=user.getUsr_pushid();
+		this.alarmyn=user.getAlaramyn();
+	}*/
 	
 	/**
 	 * Get User No
 	 * @return User No
 	 */
+	public DTO_USER(String usr_no,String usr_uuid,String usr_nn, String usr_pushid,String alarmyn){
+		this.usr_no=usr_no;
+		this.usr_uuid=usr_uuid;
+		this.usr_nn=usr_nn;
+		this.usr_pushid=usr_pushid;
+		this.alarmyn=alarmyn;
+	}
 	public String getUsr_no() {
 		return usr_no;
 	}
@@ -75,15 +95,15 @@ public class DTO_USER {
 	 * 
 	 * @return
 	 */
-	public String getAlaramyn() {
-		return alaramyn;
+	public String getAlarmyn() {
+		return alarmyn;
 	}
 	
 	/**
 	 * 
 	 * @param alaramyn
 	 */
-	public void setAlaramyn(String alaramyn) {
-		this.alaramyn = alaramyn;
+	public void setAlarmyn(String alarmyn) {
+		this.alarmyn = alarmyn;
 	}
 }

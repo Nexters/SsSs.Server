@@ -7,8 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.nexters.ssss.controller.gateway.GatewayController;
 import com.nexters.ssss.db.dao.DAO_USER_Impl;
+import com.nexters.ssss.db.dto.DTO_USER;
 import com.nexters.ssss.util.sessionUtil;
 import com.nexters.ssss.util.serviceIf;
 
@@ -18,7 +22,9 @@ import com.nexters.ssss.util.serviceIf;
  *
  */
 public class LG0001 implements serviceIf {
+	private static final Logger logger = LoggerFactory.getLogger(LG0001.class);
 
+	
 	private static final boolean isNeedLogin = false;
 	private sessionUtil sessionutil;
 	private SqlSession sqlsession;
@@ -38,16 +44,24 @@ public class LG0001 implements serviceIf {
 		// TODO Auto-generated method stub
 		Map<String, Object> rsltMap = new HashMap<String, Object>();
 		
-		sessionutil.setUsrId("test");
+		DAO_USER_Impl dui = new DAO_USER_Impl(sqlsession);
+		DTO_USER user= new DTO_USER();
 		
 		try {
-			DAO_USER_Impl dui = new DAO_USER_Impl(sqlsession);
-			if(dui.check_user_uuid((String) rsltMap.get("usr_uuid"))){//존재한다
-				
+			//logger.debug("usr_uuid is true:: "+dui.check_user_uuid((String) reqData.get("usr_uuid")));
+				if(dui.check_user_uuid((String) reqData.get("usr_uuid"))){//존재한다
+				sessionutil.setUsrId("usr_uuid");
 			}else{//존재안함
 				
+				user.setUsr_uuid((String) reqData.get("usr_uuid"));
+				user.setUsr_pushid((String) reqData.get("usr_pushid"));
+				user.setAlarmyn((String) reqData.get("alarmyn"));
+				user.setUsr_nn("");
+				user.setUsr_no("");
+				
+				dui.add_usr(user); //db에 등록
+				sessionutil.setUsrId("usr_uuid");
 			}
-			//rsltMap.put("_rslt", dui.selectUserList());
 		} catch(Exception e)
 		{ e.printStackTrace(); }
 		

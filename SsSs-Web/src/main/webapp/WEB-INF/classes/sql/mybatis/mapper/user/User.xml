@@ -12,9 +12,13 @@
             , alarmyn
         FROM TN_USER
     </select>
-    <select id="check_user_uuid" parameterType="String" resultType="int">
+    <select id="check_user_uuid"  resultType="String">
     	SELECT COUNT(*)
     	FROM tn_user
     	WHERE usr_uuid=#{usr_uuid}
     </select>
+    <insert id="add_usr">
+  		INSERT INTO tn_user(usr_no,usr_uuid,usr_nn,usr_pushid,alarmyn)
+  		VALUES (#{usr_no},#{usr_uuid},#{usr_nn},#{usr_pushid},#{alarmyn})
+  	</insert>
 </mapper>

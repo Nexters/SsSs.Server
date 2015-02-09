@@ -1,5 +1,6 @@
 package com.nexters.ssss.db.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +11,8 @@ import com.nexters.ssss.db.dto.DTO_USER;
 public class DAO_USER_Impl implements DAO_USER {
 	
 	private SqlSession sqlsession;
-
+	private DTO_USER dtouser = new DTO_USER();
+	
 	public DAO_USER_Impl(SqlSession sqlsession) {
 		this.sqlsession = sqlsession;
 	}
@@ -30,15 +32,25 @@ public class DAO_USER_Impl implements DAO_USER {
 	
 	@Override
 	public boolean check_user_uuid(String uuid){
-		
-		return false;
+		dtouser.setUsr_uuid(uuid);
+		int number= Integer.parseInt((String) sqlsession.selectOne("User.check_user_uuid", dtouser));
+		if(number==0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
+	
+	//완료
 	@Override
 	public void add_usr(DTO_USER user){
-		
+		//dtouser(user);
+		sqlsession.selectList("User.add_usr", user);
 	}
+	
+
 	@Override
-	public void assign_nickname(){
+	public void assign_nickname(DTO_USER user){
 		
 	}
 	@Override
