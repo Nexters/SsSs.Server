@@ -18,7 +18,21 @@
     	WHERE usr_uuid=#{usr_uuid}
     </select>
     <insert id="add_usr">
-  		INSERT INTO tn_user(usr_no,usr_uuid,usr_nn,usr_pushid,alarmyn)
-  		VALUES (#{usr_no},#{usr_uuid},#{usr_nn},#{usr_pushid},#{alarmyn})
+  		INSERT INTO tn_user
+  		(
+  			usr_no
+  			,usr_uuid
+  			,usr_nn
+  			,usr_pushid
+  			,alarmyn
+  		)
+  		VALUES 
+  		(
+  			"getUsrNo"()
+  			,#{usr_uuid}
+  			,#{usr_nn}
+  			,#{usr_pushid}
+  			,#{alarmyn}
+  		)
   	</insert>
 </mapper>

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.nexters.ssss.db.dto.DTO_USER;
 import com.nexters.ssss.util.serviceIf;
 import com.nexters.ssss.util.sessionUtil;
 
@@ -17,8 +19,10 @@ import com.nexters.ssss.util.sessionUtil;
  * @author limjuhyun
  *
  */
+@Repository
 public class LG0002 implements serviceIf {
 
+	@Autowired
 	private SqlSession sqlsession;
 	
 	private static final boolean isNeedLogin = false;
@@ -27,7 +31,6 @@ public class LG0002 implements serviceIf {
 	@Override
 	public Map<String, Object> doFirst(HttpSession session, SqlSession sqlsession_gw, JSONObject reqData) {
 		sessionutil = new sessionUtil(session);
-		sqlsession = sqlsession_gw;
 		if(isNeedLogin){
 			sessionutil.isUserLogin();
 		}
@@ -41,7 +44,7 @@ public class LG0002 implements serviceIf {
 		Map<String, Object> rsltMap = new HashMap<String, Object>();
 		sessionutil.removeUsrId();
 		System.out.println(sqlsession);
-		rsltMap.put("_rslt", sqlsession.selectList("User.getUserList"));
+		rsltMap.put("_rslt", ((DTO_USER) sqlsession.selectList("User.getUserList").get(0)).getUsr_nn());
 		
 		
 		
