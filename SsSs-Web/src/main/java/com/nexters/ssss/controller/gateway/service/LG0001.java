@@ -37,11 +37,19 @@ public class LG0001 implements serviceIf {
 	public Map<String, Object> execute(JSONObject reqData) {
 		// TODO Auto-generated method stub
 		Map<String, Object> rsltMap = new HashMap<String, Object>();
+		
 		sessionutil.setUsrId("test");
+		
 		try {
 			DAO_USER_Impl dui = new DAO_USER_Impl(sqlsession);
-			rsltMap.put("_rslt", dui.selectUserList());
-		} catch(Exception e) { e.printStackTrace(); }
+			if(dui.check_user_uuid((String) rsltMap.get("usr_uuid"))){//존재한다
+				
+			}else{//존재안함
+				
+			}
+			//rsltMap.put("_rslt", dui.selectUserList());
+		} catch(Exception e)
+		{ e.printStackTrace(); }
 		
 		return rsltMap;
 	}

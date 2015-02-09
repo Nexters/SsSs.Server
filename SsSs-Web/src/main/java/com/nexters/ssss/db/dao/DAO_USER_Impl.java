@@ -27,4 +27,28 @@ public class DAO_USER_Impl implements DAO_USER {
 		
 		return UserList;
 	}
+	
+	@Override
+	public boolean check_user_uuid(String uuid){
+		
+		return false;
+	}
+	@Override
+	public void add_usr(DTO_USER user){
+		
+	}
+	@Override
+	public void assign_nickname(){
+		
+	}
+	@Override
+	public int count_of_story(){
+		
+		return 0;
+	}
+	@Override
+	public String get_air_time(){
+		
+		return null;
+	}
 }
