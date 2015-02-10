@@ -28,6 +28,7 @@ public class LG0001 implements serviceIf {
 	private static final boolean isNeedLogin = false;
 	private sessionUtil sessionutil;
 	private SqlSession sqlsession;
+	
 	@Override
 	public Map<String, Object> doFirst(HttpSession session, SqlSession sqlsession_gw, JSONObject reqData) {
 		sessionutil = new sessionUtil(session);
@@ -35,7 +36,6 @@ public class LG0001 implements serviceIf {
 		if(isNeedLogin){
 			sessionutil.isUserLogin();
 		}
-		
 		return execute(reqData);
 	}
 

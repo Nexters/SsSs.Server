@@ -3,7 +3,7 @@ package com.nexters.ssss.util;
 import javax.servlet.http.HttpSession;
 
 public class sessionUtil {
-	private static final String USER_ID_FIELD = "_usr_id";
+	private static final String USER_ID_FIELD = "usr_uuid";
 	private HttpSession nSession; 
 	
 	

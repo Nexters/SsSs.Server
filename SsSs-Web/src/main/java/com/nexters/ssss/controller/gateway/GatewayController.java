@@ -75,9 +75,9 @@ public class GatewayController {
 			} 
 			
 			// 로그아웃을 한다
-			else if("LG0002".equals(strTransCd))  {
-				svcClass = new LG0002();
-				mapRslt = ((LG0002)svcClass).doFirst(session, sqlsession, joParseData);
+			else if("UD0001".equals(strTransCd))  {
+				svcClass = new UD0001();
+				mapRslt = ((UD0001)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
 			// 현재 로그인된 사용자를 가져와서 출력한다

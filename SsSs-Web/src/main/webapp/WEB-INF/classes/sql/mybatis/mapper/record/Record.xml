@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Record">
+  	<insert id="add_record" parameterType="hashMap">
+  		INSERT INTO tn_rec_files
+  		(
+  			file_no
+  			,usr_no
+  			,file_path
+  			,is_file_yn
+  			,ins_date
+  			,ins_time
+  		)
+  		VALUES 
+  		(
+  			"getFileNo"()
+  			,(SELECT usr_uuid
+  			  FROM tn_user
+  			  WHERE usr_uuid=#{usr_uuid}
+  			)
+  			,#{file_path}
+  			,#{is_file_yn}
+  			,TO_CHAR(current_timestamp,'YYYYMMDD')
+  			,TO_CHAR(current_timestamp,'HH24MISS')
+  		)
+  	</insert>
+  </mapper>
