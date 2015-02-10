@@ -19,7 +19,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-lang3-3.3.2.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/postgresql-9.2-1002.jdbc4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
