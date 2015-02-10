@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.jstl.core.Config;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.nexters.ssss.conf.conf;
 import com.nexters.ssss.db.dao.DAO_RECORD_Impl;
 import com.nexters.ssss.db.dao.DAO_USER_Impl;
 import com.nexters.ssss.db.dto.DTO_RECORD;
@@ -52,15 +54,15 @@ public class UD0001 implements serviceIf {
 		DAO_RECORD_Impl record_dao = new DAO_RECORD_Impl(sqlsession); // dao object
 		DTO_RECORD record= new DTO_RECORD(); // dto object
 		
-		String strBase64 = "data encoded base64";
+		String strBase64 = "data encoded base64"; //base64 인코딩된걸 여기에 받아야한다.
 		FileUtil fu = new FileUtil();
 		try {
 			//파일을 바이너리로 저장 뒤, 저장된 파일 경로를 받는다.
-			String strFilePath = fu.base64StringToFile(strBase64, "/Users/juhyun/Documents/", "png");
+			String strFilePath = fu.base64StringToFile(strBase64, conf.FILE_TEMP_PATH, "png");
 			
-			//압축파일을 /home/was/files/에 압축해제를 한다.
+			//압축파일을 BRD_VOICE_PATH 변수로 설정된 곳에 압축해제를 한다.
 			
-			ArrayList listFiles = fu.unZip(strFilePath, "/home/was/files/");
+			ArrayList listFiles = fu.unZip(strFilePath, conf.BRD_VOICE_PATH);
 			
 			////////////////////////////서버에 등록
 			
