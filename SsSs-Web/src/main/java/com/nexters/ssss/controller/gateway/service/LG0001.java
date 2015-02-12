@@ -50,7 +50,9 @@ public class LG0001 implements serviceIf {
 		try {
 			//logger.debug("usr_uuid is true:: "+dui.check_user_uuid((String) reqData.get("usr_uuid")));
 				if(dui.check_user_uuid((String) reqData.get("usr_uuid"))){//존재한다
-				sessionutil.setUsrId("usr_uuid");
+					
+					//유저 정보를 가져온다
+				sessionutil.setUsrId("");
 			}else{//존재안함
 				
 				user.setUsr_uuid((String) reqData.get("usr_uuid"));
@@ -58,9 +60,13 @@ public class LG0001 implements serviceIf {
 				user.setAlarmyn((String) reqData.get("alarmyn"));
 				user.setUsr_nn("");
 				user.setUsr_no("");
-				
 				dui.add_usr(user); //db에 등록
+				
+				//유저 정보를 가져온다
 				sessionutil.setUsrId("usr_uuid");
+				//sessionutil.setSession("usr_no", value);
+				
+				rsltMap.put("arion_yn", "Y");
 			}
 		} catch(Exception e)
 		{ e.printStackTrace(); }
