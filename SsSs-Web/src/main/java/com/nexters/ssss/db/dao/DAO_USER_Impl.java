@@ -54,7 +54,7 @@ public class DAO_USER_Impl implements DAO_USER {
 	@Override
 	public void add_usr(DTO_USER user){
 		//dtouser(user);
-		sqlsession.selectList("User.add_usr", user);
+		sqlsession.insert("User.add_usr", user);
 	}
 	
 
