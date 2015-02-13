@@ -63,7 +63,7 @@ public class LG0001 implements serviceIf {
 				user.setAlarmyn((String) reqData.get("alarmyn"));
 
 				user.setUsr_nn("주현짱");
-				//user.setUsr_no("");
+			
 				
 
 				dui.add_usr(user); //db에 등록
