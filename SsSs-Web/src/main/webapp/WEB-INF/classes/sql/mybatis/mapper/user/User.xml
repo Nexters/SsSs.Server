@@ -17,6 +17,11 @@
     	FROM tn_user
     	WHERE usr_uuid=#{usr_uuid}
     </select>
+     <select id="get_usr_no"  resultType="String">
+    	SELECT usr_no
+    	FROM tn_user
+    	WHERE usr_uuid=#{usr_uuid}
+    </select>
     <insert id="add_usr">
   		INSERT INTO tn_user
   		(

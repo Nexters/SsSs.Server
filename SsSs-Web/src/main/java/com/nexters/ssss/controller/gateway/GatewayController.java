@@ -81,9 +81,12 @@ public class GatewayController {
 			} 
 			
 			// 현재 로그인된 사용자를 가져와서 출력한다
-			else if("BD0001".equals(strTransCd))  {
-				svcClass = new BD0001();
-				mapRslt = ((BD0001)svcClass).doFirst(session, sqlsession, joParseData);
+			else if("CR0001".equals(strTransCd))  {
+				svcClass = new CR0001();
+				mapRslt = ((CR0001)svcClass).doFirst(session, sqlsession, joParseData);
+			}else if("CR0002".equals(strTransCd))  {
+				svcClass = new CR0002();
+				mapRslt = ((CR0002)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
 			// 서비스가 없을 경우에는.. 오류를 

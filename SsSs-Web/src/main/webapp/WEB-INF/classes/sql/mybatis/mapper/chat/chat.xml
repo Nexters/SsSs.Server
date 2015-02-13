@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Chat">
+	<insert id="add_chat">
+		INSERT INTO tn_chat
+		(
+		chat_no
+		,usr_no
+		,cont
+		,ins_date
+		,ins_time
+		)
+		VALUES
+		(
+		"getFileNo"()
+		,#{usr_no}
+		,#{cont}
+		,TO_CHAR(current_timestamp,'YYYYMMDD')
+		,TO_CHAR(current_timestamp,'HH24MISS')
+		)
+	</insert>
+	<select id="get_chat_list" resultType="com.nexters.ssss.db.dto.DTO_CHAT" >
+		SELECT *
+		FROM tn_chat
+		<where>
+			<choose>
+				<when test="type='1'">
+					chat_no &gt; #{chat_no}
+					order by chat_no desc
+				</when>
+				<when test="type='2'">
+					chat_no &lt; #{chat_no}
+					order by chat_no asc
+				</when>
+			</choose>
+		</where>
+		limit 10
+	</select>
+</mapper>

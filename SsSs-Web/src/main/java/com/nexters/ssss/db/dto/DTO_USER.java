@@ -1,5 +1,8 @@
 package com.nexters.ssss.db.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DTO_USER {
 	private String usr_no;
 	private String usr_uuid;

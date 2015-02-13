@@ -10,4 +10,5 @@ public interface DAO_USER {
 	public void assign_nickname(DTO_USER user);
 	public int count_of_story();
 	public String get_air_time();
+	public String get_usr_no(String uuid);
 }

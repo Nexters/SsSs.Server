@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.nexters.ssss.db.dao.DAO_RECORD_Impl;
 import com.nexters.ssss.db.dao.DAO_USER_Impl;
@@ -24,7 +25,7 @@ import com.nexters.ssss.util.sessionUtil;
  * @author limjuhyun
  *
  */
-@Repository
+@Service
 public class UD0001 implements serviceIf {
 
 	@Autowired
@@ -67,9 +68,10 @@ public class UD0001 implements serviceIf {
 			//2개는 client로 부터온다. 
 			record.setFile_path((String)listFiles.get(0));
 			record.setIs_file_yn((String) reqData.get("is_file_yn"));
-			
-			/// 2개뺴고 나머지 4개는 sql문에서 처리한다. -> uuid를 보내는 이유는 tn_user에서 uuid를 통해 usr_no를 찾아야함 
-			record_dao.add_record( record ,(String) sessionutil.getSession("usr_uuid"));
+			//1개는 session에 저장되어 있는 것을 가져온다.
+			record.setUsr_no((String) sessionutil.getSession("usr_no"));
+			/// 2개뺴고 나머지 4개는 sql문에서 처리한다.
+			record_dao.add_record(record);
 			//압축 해제된 파일 리스트
 			System.out.println(listFiles.toString());
 		} catch (Exception e) {

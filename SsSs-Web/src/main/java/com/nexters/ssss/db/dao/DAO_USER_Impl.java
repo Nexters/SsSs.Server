@@ -5,14 +5,19 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.nexters.ssss.db.dto.DTO_USER;
 
+@Component
 public class DAO_USER_Impl implements DAO_USER {
+	
 	
 	private SqlSession sqlsession;
 	private DTO_USER dtouser = new DTO_USER();
-	
+	public DAO_USER_Impl(){
+		
+	}
 	public DAO_USER_Impl(SqlSession sqlsession) {
 		this.sqlsession = sqlsession;
 	}
@@ -40,7 +45,11 @@ public class DAO_USER_Impl implements DAO_USER {
 			return true;
 		}
 	}
-	
+	@Override
+	public String get_usr_no(String uuid){
+		
+		return (String) sqlsession.selectOne("User.get_usr_no",uuid);
+	}
 	//완료
 	@Override
 	public void add_usr(DTO_USER user){
