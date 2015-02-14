@@ -65,8 +65,8 @@ public class GatewayController {
 			}
 			
 			//요청이 들어온 데이터를 로그에 남겨 둔다.
-			logger.debug("strReqSvc::"+strTransCd);
-			logger.debug("joParseData::"+joParseData.toJSONString());
+			//logger.debug("strReqSvc::"+strTransCd);
+			//logger.debug("joParseData::"+joParseData.toJSONString());
 						
 			// 로그인을 한다
 			if("LG0001".equals(strTransCd))  {

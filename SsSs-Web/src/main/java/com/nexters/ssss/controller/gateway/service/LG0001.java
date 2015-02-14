@@ -52,7 +52,7 @@ public class LG0001 implements serviceIf {
 		DTO_USER user= new DTO_USER();
 		
 		try {
-			//logger.debug("usr_uuid is true:: "+dui.check_user_uuid((String) reqData.get("usr_uuid")));
+			logger.debug("usr_uuid is true:: "+dui.check_user_uuid((String) reqData.get("usr_uuid")));
 			if(dui.check_user_uuid((String) reqData.get("usr_uuid"))){//존재한다
 
 				sessionutil.setUsrId((String) reqData.get("usr_uuid"));
@@ -61,17 +61,12 @@ public class LG0001 implements serviceIf {
 			}else{//존재안함
 				
 				user.setUsr_uuid((String) reqData.get("usr_uuid"));
-				
-				//System.out.println((String) reqData.get("usr_uuid"));
-				
 				user.setUsr_pushid((String) reqData.get("usr_pushid"));
-				
-				//System.out.println((String) reqData.get("usr_pushid"));
-				
 				user.setAlarmyn((String) reqData.get("alarmyn"));
 
 				user.setUsr_nn("주현짱");
 			
+				logger.debug(user.toString());
 				
 
 				dui.add_usr(user); //db에 등록
