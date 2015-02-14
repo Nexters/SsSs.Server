@@ -50,8 +50,7 @@ public class DAO_USER_Impl implements DAO_USER {
 	@Override
 	public String get_usr_no(String uuid){
 		
-		//String temp=(String) sqlsession.selectOne("User.get_usr_no",uuid);
-		return "asd";
+		return (String) sqlsession.selectOne("User.get_usr_no",uuid);
 	}
 	//완료
 	@Override
