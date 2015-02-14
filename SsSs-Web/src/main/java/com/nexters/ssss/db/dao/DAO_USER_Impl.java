@@ -38,8 +38,8 @@ public class DAO_USER_Impl implements DAO_USER {
 	@Override
 	public boolean check_user_uuid(String uuid){
 		
-		dtouser.setUsr_uuid(uuid);
-		int number= Integer.parseInt((String) sqlsession.selectOne("User.check_user_uuid", dtouser));
+		//dtouser.setUsr_uuid(uuid);
+		int number= Integer.parseInt((String) sqlsession.selectOne("User.check_user_uuid", uuid));
 		if(number==0) {
 			return false;
 		} else {
