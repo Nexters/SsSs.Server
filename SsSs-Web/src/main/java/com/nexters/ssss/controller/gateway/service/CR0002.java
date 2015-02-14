@@ -61,7 +61,6 @@ public class CR0002 implements serviceIf {
 			listFinalRsltData.add(mapListData);
 		}
 		rsltMap.put("_rslt", listFinalRsltData);
-		
 		/**
 		 * 
 		 */

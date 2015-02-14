@@ -39,24 +39,25 @@ public class DAO_USER_Impl implements DAO_USER {
 	public boolean check_user_uuid(String uuid){
 		
 		dtouser.setUsr_uuid(uuid);
-		int number= Integer.parseInt((String) sqlsession.selectOne("com.nexters.ssss.db.dao.DAO_USER_Impl.check_user_uuid", dtouser));
+		int number= Integer.parseInt((String) sqlsession.selectOne("User.check_user_uuid", dtouser));
 		if(number==0) {
 			return false;
 		} else {
 			return true;
 		}
-		
 	}
+	
 	@Override
 	public String get_usr_no(String uuid){
 		
-		return (String) sqlsession.selectOne("com.nexters.ssss.db.dao.DAO_USER_Impl.get_usr_no",uuid);
+		String temp=(String) sqlsession.selectOne("User.get_usr_no",uuid);
+		return "asd";
 	}
 	//완료
 	@Override
 	public void add_usr(DTO_USER user){
 		//dtouser(user);
-		sqlsession.insert("com.nexters.ssss.db.dao.DAO_USER_Impl.add_usr", user);
+		sqlsession.insert("User.add_usr", user);
 	}
 	
 

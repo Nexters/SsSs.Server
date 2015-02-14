@@ -35,9 +35,11 @@ public class LG0001 implements serviceIf {
 	public Map<String, Object> doFirst(HttpSession session, SqlSession sqlsession_gw, JSONObject reqData) {
 		sessionutil = new sessionUtil(session);
 		sqlsession = sqlsession_gw;
+		
 		if(isNeedLogin){
 			sessionutil.isUserLogin();
 		}
+		logger.debug("reqData >> " + reqData.toString());//삭제예정
 		return execute(reqData);
 	}
 
@@ -51,7 +53,7 @@ public class LG0001 implements serviceIf {
 		
 		try {
 			//logger.debug("usr_uuid is true:: "+dui.check_user_uuid((String) reqData.get("usr_uuid")));
-				if(dui.check_user_uuid((String) reqData.get("usr_uuid"))){//존재한다
+			if(dui.check_user_uuid((String) reqData.get("usr_uuid"))){//존재한다
 
 				sessionutil.setUsrId((String) reqData.get("usr_uuid"));
 				sessionutil.setUseNo((String) dui.get_usr_no((String) reqData.get("usr_uuid"))); //usr_no저장
@@ -59,7 +61,13 @@ public class LG0001 implements serviceIf {
 			}else{//존재안함
 				
 				user.setUsr_uuid((String) reqData.get("usr_uuid"));
+				
+				//System.out.println((String) reqData.get("usr_uuid"));
+				
 				user.setUsr_pushid((String) reqData.get("usr_pushid"));
+				
+				//System.out.println((String) reqData.get("usr_pushid"));
+				
 				user.setAlarmyn((String) reqData.get("alarmyn"));
 
 				user.setUsr_nn("주현짱");
@@ -69,7 +77,7 @@ public class LG0001 implements serviceIf {
 				dui.add_usr(user); //db에 등록
 
 				sessionutil.setUsrId((String) reqData.get("usr_uuid")); //usr_uuid 저장
-				sessionutil.setUseNo((String) dui.get_usr_no((String) reqData.get("usr_uuid"))); //usr_no저장
+				sessionutil.setUseNo((String) dui.get_usr_no((String) reqData.get("usr_uuid"))); //usr_no저장//수정예정
 
 			}
 		} catch(Exception e)

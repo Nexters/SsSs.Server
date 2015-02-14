@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nexters.ssss.db.dao.DAO_USER_Impl">
+<mapper namespace="User">
   	<select id="getUserList" resultType="com.nexters.ssss.db.dto.DTO_USER">
         SELECT 
             usr_no
@@ -17,11 +17,13 @@
     	FROM tn_user
     	WHERE usr_uuid=#{usr_uuid}
     </select>
+    
      <select id="get_usr_no"  resultType="String">
     	SELECT usr_no
     	FROM tn_user
     	WHERE usr_uuid=#{usr_uuid}
     </select>
+    
     <insert id="add_usr">
   		INSERT INTO tn_user
   		(
