@@ -23,7 +23,16 @@
     	FROM tn_user
     	WHERE usr_uuid=#{usr_uuid}
     </select>
-    
+    <select id="get_user_info" resultType="com.nexters.ssss.db.dto.DTO_USER">
+    	SELECT
+    		usr_no
+    		, usr_uuid
+    		, usr_nn
+    		, usr_pushid
+    		, alarmyn
+    	FROM TN_USER
+    	WHERE usr_uuid=#{usr_uuid}
+    </select>
     <insert id="add_usr">
   		INSERT INTO tn_user
   		(

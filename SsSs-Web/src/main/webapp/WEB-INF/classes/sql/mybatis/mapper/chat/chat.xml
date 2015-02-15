@@ -10,6 +10,7 @@
 		(
 		chat_no
 		,usr_no
+		,usr_nn
 		,cont
 		,ins_date
 		,ins_time
@@ -18,6 +19,7 @@
 		(
 		"getFileNo"()
 		,#{usr_no}
+		,#{usr_nn}
 		,#{cont}
 		,TO_CHAR(current_timestamp,'YYYYMMDD')
 		,TO_CHAR(current_timestamp,'HH24MISS')
@@ -28,16 +30,16 @@
 		FROM tn_chat
 		<where>
 			<choose>
-				<when test="type='1'">
+				<when test='type="1"'>
 					chat_no &gt; #{chat_no}
-					order by chat_no desc
-				</when>
-				<when test="type='2'">
-					chat_no &lt; #{chat_no}
 					order by chat_no asc
 				</when>
+				<otherwise>
+					chat_no &lt; #{chat_no}
+					order by chat_no desc
+				</otherwise>
 			</choose>
 		</where>
-		limit 10
+		limit #{cnt}
 	</select>
 </mapper>

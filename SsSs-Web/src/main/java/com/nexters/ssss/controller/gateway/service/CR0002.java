@@ -30,7 +30,7 @@ public class CR0002 implements serviceIf {
 	
 	
 	private SqlSession sqlsession;
-	private static final boolean isNeedLogin = false;
+	private static final boolean isNeedLogin = true;
 	private sessionUtil sessionutil;
 
 	@Override
@@ -54,22 +54,17 @@ public class CR0002 implements serviceIf {
 		
 		List<DTO_CHAT> chat_list = new ArrayList<DTO_CHAT>();
 		DAO_CHAT_Impl chat_dao= new DAO_CHAT_Impl(sqlsession);
-		listRsltData=chat_dao.get_chat_list((String)reqData.get("type"),(String)reqData.get("chat_no"),(String)reqData.get("cnt"));
+		listRsltData=chat_dao.get_chat_list((String)reqData.get("type"),(String)reqData.get("chat_no"),Integer.parseInt((String)reqData.get("cnt")));
 		for(DTO_CHAT dto : listRsltData) {
 			HashMap<String, Object> mapListData = new HashMap<String, Object>();
 			mapListData.put("chat_no", dto.getChat_no());
+			mapListData.put("chat_nn", dto.getUsr_nn());
+			mapListData.put("chat_cont", dto.getCont());
+			mapListData.put("chat_ins_date", dto.getIns_date());
+			mapListData.put("chat_ins_time", dto.getIns_time());
 			listFinalRsltData.add(mapListData);
 		}
 		rsltMap.put("_rslt", listFinalRsltData);
-		/**
-		 * 
-		 */
-		DTO_USER user = sessionutil.getUserInform();
-		user.getUsr_nn();
-		user.getUsr_pushid();
-		/**
-		 * 
-		 */
 		return rsltMap;
 	}
 }

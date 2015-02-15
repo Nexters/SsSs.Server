@@ -74,13 +74,19 @@ public class GatewayController {
 				mapRslt = ((LG0001)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
-			// 로그아웃을 한다
+			// 로그인을 한다
+			else if("LG0002".equals(strTransCd))  {
+				svcClass = new LG0002();
+				mapRslt = ((LG0002)svcClass).doFirst(session, sqlsession, joParseData);
+			} 
+			
+			// 음성 데이터 업로드
 			else if("UD0001".equals(strTransCd))  {
 				svcClass = new UD0001();
 				mapRslt = ((UD0001)svcClass).doFirst(session, sqlsession, joParseData);
 			} 
 			
-			// 현재 로그인된 사용자를 가져와서 출력한다
+			// 채팅 코멘트 등록
 			else if("CR0001".equals(strTransCd))  {
 				svcClass = new CR0001();
 				mapRslt = ((CR0001)svcClass).doFirst(session, sqlsession, joParseData);
@@ -102,6 +108,7 @@ public class GatewayController {
 			strTransCd = "ERROR";
 			mapRslt = errorMsg.makeErrorMsg(e.hashCode(), e.getMessage(), "9999");
 			logger.debug("hashCode::"+e.hashCode()+", Message::"+e.getMessage());
+			logger.error("GatewayError", e);
 		} catch (Exception e) {
 			strTransCd = "ERROR";
 			mapRslt = errorMsg.makeErrorMsg(e.hashCode(), e.getMessage(), "9999");

@@ -14,11 +14,11 @@ public class DTO_CHAT {
 	public void DTO_CHAT(){
 		
 	}
-	public String getusr_nn(){
+	public String getUsr_nn(){
 		return usr_nn;
 	}
-	public void setusr_nn(String usr_nn){
-		
+	public void setUsr_nn(String usr_nn){
+		this.usr_nn = usr_nn;
 	}
 	public String getChat_no() {
 		return chat_no;

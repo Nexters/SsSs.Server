@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.nexters.ssss.db.dao.DAO_CHAT_Impl;
 import com.nexters.ssss.db.dto.DTO_CHAT;
+import com.nexters.ssss.db.dto.DTO_USER;
 import com.nexters.ssss.util.serviceIf;
 import com.nexters.ssss.util.sessionUtil;
 
@@ -54,8 +55,12 @@ public class CR0001 implements serviceIf {
 	
 		///////////////logic
 		try{
+			DTO_USER usrInfo = sessionutil.getUserInform();
 			chat.setCont((String) reqData.get("cont"));
-			chat.setUsr_no((String) sessionutil.getSession("usr_no"));
+			chat.setUsr_no(usrInfo.getUsr_no());
+			chat.setUsr_nn(usrInfo.getUsr_nn());
+			
+			rsltMap.put("_registerYN", "Y");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

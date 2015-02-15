@@ -8,5 +8,5 @@ import com.nexters.ssss.db.dto.DTO_CHAT;
 
 public interface DAO_CHAT {
 	public void add_chat(DTO_CHAT chat);
-	public List get_chat_list(String type,String chat_no, String cnt);
+	public List get_chat_list(String type,String chat_no, int cnt);
 }

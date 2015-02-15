@@ -24,7 +24,7 @@ public class DAO_CHAT_Impl implements DAO_CHAT {
 		this.sqlsession= sqlsession;
 	}
 	@Override
-	public List get_chat_list(String type,String chat_no, String cnt){
+	public List get_chat_list(String type,String chat_no, int cnt){
 		HashMap<String,Object> hashmap = new HashMap<String,Object>();
 		hashmap.put("type", type);
 		hashmap.put("chat_no", chat_no);
@@ -34,7 +34,6 @@ public class DAO_CHAT_Impl implements DAO_CHAT {
 	}
 	@Override
 	public void add_chat(DTO_CHAT chat) {
-		System.out.println(sqlsession);
 		sqlsession.insert("Chat.add_chat", chat);
 	}
 

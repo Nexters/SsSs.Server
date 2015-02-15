@@ -11,4 +11,5 @@ public interface DAO_USER {
 	public int count_of_story();
 	public String get_air_time();
 	public String get_usr_no(String uuid);
+	public DTO_USER get_user_info(DTO_USER user);
 }

@@ -10,6 +10,14 @@
 		</layout>
 	</appender>
 	
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+	   <param name="file" value="/logs/myStruts1App.log" />
+	   <layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" 
+			value="[%d{yyyy-MM-dd HH:mm:ss}] %5p %t(), %C:%M(%L) - %m%n" />
+	   </layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.nexters.ssss">
 		<level value="debug" />

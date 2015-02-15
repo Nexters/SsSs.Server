@@ -74,4 +74,10 @@ public class DAO_USER_Impl implements DAO_USER {
 		
 		return null;
 	}
+	
+	@Override
+	public DTO_USER get_user_info(DTO_USER user) {
+		// TODO Auto-generated method stub
+		return (DTO_USER) sqlsession.selectOne("User.get_user_info", user);
+	}
 }
