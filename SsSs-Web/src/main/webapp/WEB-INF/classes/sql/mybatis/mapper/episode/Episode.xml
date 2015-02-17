@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Episode">
+
+	<select id="get_brcast_time" parameterType="hashmap" resultType="String">
+		select brcast_time
+		from tn_episode
+		where ep_no = #{ep_no}
+	</select>
+	
+	<select id="get_last_episode" parameterType= "int" resultType= "String">
+		select ep_no
+		from tn_episode
+		where ep_no &lt; #{ep_no_}
+		order by ep_no desc
+		limit 1
+	</select>
+	
+	<select id="check_episode" parameterType= "hashmap" resultType="String">
+		select COUNT(*)
+		from tn_episode
+		where brcast_date >= #{date} AND brcast_time >= #{time}
+	</select>
+	<select id="get_episode_info_ep_no" parameterType= "hashmap" resultType="com.nexters.ssss.db.dto.DTO_EPISODE">
+    	SELECT
+    		ep_no
+    		, brcast_date
+    		, brcast_time
+    		, ins_date
+    		, ins_time
+    	FROM tn_episode
+    	where ep_no = #{ep_no}
+    </select>
+	
+	<select id="get_episode_info" parameterType= "hashmap" resultType="com.nexters.ssss.db.dto.DTO_EPISODE">
+    	SELECT
+    		ep_no
+    		, brcast_date
+    		, brcast_time
+    		, ins_date
+    		, ins_time
+    	FROM tn_episode
+    	where brcast_date >= #{date} AND brcast_time >= #{time}
+    </select>
+</mapper>
