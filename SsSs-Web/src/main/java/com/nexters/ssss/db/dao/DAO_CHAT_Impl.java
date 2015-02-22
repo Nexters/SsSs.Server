@@ -13,7 +13,7 @@ import com.nexters.ssss.db.dto.DTO_CHAT;
 
 @Component
 public class DAO_CHAT_Impl implements DAO_CHAT {
-	//@Autowired
+
 	private SqlSession sqlsession;
 	private ArrayList<DTO_CHAT> temp_chat_list = new ArrayList<DTO_CHAT>();
 	
