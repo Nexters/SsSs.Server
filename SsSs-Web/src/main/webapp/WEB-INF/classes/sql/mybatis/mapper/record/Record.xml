@@ -8,9 +8,30 @@
   	<select id="rec_cnt"  parameterType= "hashmap" resultType="String">
   		select count(*)
   		from tn_rec_files
-  		where ins_date <![CDATA[<=]]> #{first_brcast_date} AND
-  				ins_date <![CDATA[>=]]> #{last_brcast_date}
+  		where (
+  			  ins_date <![CDATA[<]]> #{first_brcast_date}
+  			  AND
+  			  ins_date <![CDATA[>]]> #{last_brcast_date} 
+  			  )
+  			  OR 
+  			  (
+  			  ins_date <![CDATA[=]]> #{first_brcast_date} 
+  			  AND
+  			  ins_time <![CDATA[<]]> #{first_brcast_time} 
+  			  )
+  			  OR
+  			  (
+  			  ins_date <![CDATA[=]]> #{last_brcast_date} 
+  			  AND
+  			  ins_time <![CDATA[>]]> #{last_brcast_time} 
+  			  )
+  		
   	</select>
+	
+			
+			
+			
+		
   	
   	<insert id="add_record">
   		INSERT INTO tn_rec_files

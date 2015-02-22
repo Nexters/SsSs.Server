@@ -39,7 +39,7 @@ public class Time {
 			second=episode_second-client_second;
 		}
 		
-		if(client_min>episode_second){
+		if(client_min>episode_min){
 			min=(episode_min+60)-client_min;
 			episode_hour=episode_hour-1;
 		}else{
