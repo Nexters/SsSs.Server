@@ -105,23 +105,23 @@ public class sessionUtil {
 	 * @param dto
 	 */
 	public void printUserInform(DTO_USER dto) {
-		logger.info("UserInform", "로그인 사용자 정보 ############################################");
-		logger.info("UserInform", "getUsr_no::"+dto.getUsr_no());
-		logger.info("UserInform", "getUsr_nn::"+dto.getUsr_nn());
-		logger.info("UserInform", "getUsr_pushid::"+dto.getUsr_pushid());
-		logger.info("UserInform", "getUsr_uuid::"+dto.getUsr_uuid());
-		logger.info("UserInform", "getAlarmyn::"+dto.getAlarmyn());
+		logger.debug("로그인 사용자 정보 ############################################");
+		logger.debug("getUsr_no::"+dto.getUsr_no());
+		logger.debug("getUsr_nn::"+dto.getUsr_nn());
+		logger.debug("getUsr_pushid::"+dto.getUsr_pushid());
+		logger.debug("getUsr_uuid::"+dto.getUsr_uuid());
+		logger.debug("getAlarmyn::"+dto.getAlarmyn());
 	}
 	
 	/**
 	 * 세션 정보 출력
 	 */
 	public void printSessionInform() {
-		logger.info("UserInform", "세션 정보 ############################################");
-		logger.info("UserInform", "getCreationTime::"+nSession.getCreationTime());
-		logger.info("UserInform", "isNew::"+nSession.isNew());
-		logger.info("UserInform", "getLastAccessedTime::"+nSession.getLastAccessedTime());
-		logger.info("UserInform", "getMaxInactiveInterval::"+nSession.getMaxInactiveInterval());
+		logger.debug("세션 정보 ############################################");
+		logger.debug("getCreationTime::"+nSession.getCreationTime());
+		logger.debug("isNew::"+nSession.isNew());
+		logger.debug("getLastAccessedTime::"+nSession.getLastAccessedTime());
+		logger.debug("getMaxInactiveInterval::"+nSession.getMaxInactiveInterval());
 	}
 
 }
