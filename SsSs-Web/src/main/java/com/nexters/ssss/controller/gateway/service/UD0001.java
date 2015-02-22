@@ -23,8 +23,8 @@ import com.nexters.ssss.util.serviceIf;
 import com.nexters.ssss.util.sessionUtil;
 
 /**
- * 로그아웃
- * @author limjuhyun
+ * 업로드 서비스
+ * @author 이준범
  *
  */
 
@@ -59,6 +59,8 @@ public class UD0001 implements serviceIf {
 		String strBase64 = (String) reqData.get("rec_file"); //base64 인코딩된걸 여기에 받아야한다.
 		FileUtil fu = new FileUtil();
 		try {
+			// 사용자의 정보를 가져온다.
+			DTO_USER dtoUser = sessionutil.getUserInform();
 			//파일을 바이너리로 저장 뒤, 저장된 파일 경로를 받는다.
 			String strFilePath = fu.base64StringToFile(strBase64, conf.FILE_TEMP_PATH, "zip");
 			
@@ -69,11 +71,20 @@ public class UD0001 implements serviceIf {
 			////////////////////////////서버에 등록
 			
 			//2개는 client로 부터온다. 
-			record.setFile_path((String)listFiles.get(0));
-			record.setIs_file_yn((String) reqData.get("is_file_yn"));
+			String strVoiceFilePath = (String)listFiles.get(0);
+			
+			//파일 경로가 없을 경우 압축해제를 실패했거나 정상적으로 해당 액션이 안된 경우를 처리해준다.
+			if(strVoiceFilePath!=null) {
+				record.setFile_path(strVoiceFilePath);
+				record.setIs_file_yn("Y");
+			} else {
+				record.setFile_path("");
+				record.setIs_file_yn("N");
+			}
+			
 
 			//1개는 session에 저장되어 있는 것을 가져온다.
-			record.setUsr_no((String) sessionutil.getSession("usr_no"));
+			record.setUsr_no(dtoUser.getUsr_no());
 			/// 2개뺴고 나머지 4개는 sql문에서 처리한다.
 			record_dao.add_record(record);
 

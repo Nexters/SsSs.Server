@@ -16,9 +16,21 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 파일 유틸
+ * @author limjuhyun
+ *
+ */
 public class FileUtil {
 	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
+	/**
+	 * base64 String 값을 파일로 변환하여 저장한다.
+	 * @param base64File base64 String Value
+	 * @param outputFolder 저장 경로
+	 * @param extensionType 확장자 타입
+	 * @return
+	 */
 	public String base64StringToFile (String base64File, String outputFolder, String extensionType) {
 		BASE64Decoder decoder = new BASE64Decoder();
 		FileOutputStream fos = null;
@@ -40,7 +52,10 @@ public class FileUtil {
 		return "";
 	}
 	
-	
+	/**
+	 * Unique한 파일 이름을 가져온다. 
+	 * @return String
+	 */
 	public String generateUniqueFileName(){
 	    String filename="";
 	    long millis=System.currentTimeMillis();
@@ -52,7 +67,14 @@ public class FileUtil {
 	    return filename;
 	}
 	
-	public ArrayList unZip(String zipFile, String outputFolder) {
+	/**
+	 * 압축 파일을 해제한다.
+	 * @param zipFile 압축 파일 경로
+	 * @param outputFolder 압축 해제할 폴더
+	 * @param isDeleteOriginFile 기존 압축 파일 삭제 유무
+	 * @return 압축 해제한 파일들 경로
+	 */
+	public ArrayList unZip(String zipFile, String outputFolder, boolean isDeleteOriginFile) {
 		byte[] buffer = new byte[1024];
 		ArrayList listFiles = new ArrayList();
 		try{
@@ -91,13 +113,57 @@ public class FileUtil {
 	            fos.close();   
 	            ze = zis.getNextEntry();
 	    	}
-	 
+	    	
+	    	
 	        zis.closeEntry();
 	    	zis.close();
+	    	
+	    	if(isDeleteOriginFile==true){
+	    		boolean isDelete = deleteFile(zipFile);
+		    	logger.debug("압축 해제 후 파일 삭제 유무 :: "+isDelete);
+	    	}
+	    	
 	    }catch(IOException ex){
 	    	logger.error("Exception :: ", ex);
 	    }
 		
 		return listFiles;
+	}
+	
+	/**
+	 * 압축 파일 해제 (기존 파일 무조건 삭제)
+	 * @param zipFile
+	 * @param outputFolder
+	 * @return 압축 해제한 파일들 경로
+	 */
+	public ArrayList unZip(String zipFile, String outputFolder) {
+		return unZip(zipFile, outputFolder, true);
+	}
+
+		
+	/**
+	 * 파일 삭제
+	 * @param fileLocation 삭제할 파일 경
+	 * @return 삭제 유무(T/F)
+	 */
+	public boolean deleteFile (String fileLocation) {
+		try {
+			// 압축 해제가 끝나면 압축 파일을 삭제한다.
+	    	File tempFile = new File(fileLocation);
+	    	
+	    	if(tempFile.exists()) {
+	    		if(tempFile.delete())
+	    			return true;
+	    		else
+	    			return false;
+	    	} else {
+	    		logger.debug("파일 삭제", "파일이 존재하지 않습니다.");
+	    		return false;
+	    	}
+		} catch(Exception e) {
+			logger.error("파일 삭제 중 오류", e);
+			return false;
+		}
+		
 	}
 }
