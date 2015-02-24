@@ -34,7 +34,7 @@ public class UD0001 implements serviceIf {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	private static final boolean isNeedLogin = false;
+	private static final boolean isNeedLogin = true;
 	private sessionUtil sessionutil;
 
 	@Override
