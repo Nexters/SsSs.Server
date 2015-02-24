@@ -9,6 +9,8 @@ import javax.servlet.jsp.jstl.core.Config;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -30,11 +32,12 @@ import com.nexters.ssss.util.sessionUtil;
 
 @Service
 public class UD0001 implements serviceIf {
+	private static final Logger logger = LoggerFactory.getLogger(UD0001.class);
 
 	@Autowired
 	private SqlSession sqlsession;
 	
-	private static final boolean isNeedLogin = true;
+	private static final boolean isNeedLogin = false;
 	private sessionUtil sessionutil;
 
 	@Override
@@ -60,19 +63,18 @@ public class UD0001 implements serviceIf {
 		FileUtil fu = new FileUtil();
 		try {
 			// 사용자의 정보를 가져온다.
-			DTO_USER dtoUser = sessionutil.getUserInform();
+			//DTO_USER dtoUser = sessionutil.getUserInform();
 			//파일을 바이너리로 저장 뒤, 저장된 파일 경로를 받는다.
 			String strFilePath = fu.base64StringToFile(strBase64, conf.FILE_TEMP_PATH, "zip");
 			
 			//압축파일을 BRD_VOICE_PATH 변수로 설정된 곳에 압축해제를 한다.
 			
-			ArrayList listFiles = fu.unZip(strFilePath, conf.BRD_VOICE_PATH);
-			
+			ArrayList<String> listFiles = fu.unZip(strFilePath, conf.BRD_VOICE_PATH, false);
+			logger.debug("Zip List::"+listFiles.toString());
 			////////////////////////////서버에 등록
 			
 			//2개는 client로 부터온다. 
 			String strVoiceFilePath = (String)listFiles.get(0);
-			
 			//파일 경로가 없을 경우 압축해제를 실패했거나 정상적으로 해당 액션이 안된 경우를 처리해준다.
 			if(strVoiceFilePath!=null) {
 				record.setFile_path(strVoiceFilePath);
@@ -84,12 +86,13 @@ public class UD0001 implements serviceIf {
 			
 
 			//1개는 session에 저장되어 있는 것을 가져온다.
-			record.setUsr_no(dtoUser.getUsr_no());
+			//record.setUsr_no(dtoUser.getUsr_no());
+			record.setUsr_no("1502100132290013");
 			/// 2개뺴고 나머지 4개는 sql문에서 처리한다.
 			record_dao.add_record(record);
 
 			//압축 해제된 파일 리스트
-			System.out.println(listFiles.toString());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,7 +12,6 @@ import java.util.zip.ZipEntry;
 import sun.misc.BASE64Decoder;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +39,7 @@ public class FileUtil {
 			byte[] decodedBytes = decoder.decodeBuffer(base64File);
 			fos = new FileOutputStream(newFile);
 			fos.write(decodedBytes);
+			logger.debug("file binary::"+new String(decodedBytes));
 			fos.close();
 			
 			return newFile.getPath();
@@ -74,9 +74,9 @@ public class FileUtil {
 	 * @param isDeleteOriginFile 기존 압축 파일 삭제 유무
 	 * @return 압축 해제한 파일들 경로
 	 */
-	public ArrayList unZip(String zipFile, String outputFolder, boolean isDeleteOriginFile) {
+	public ArrayList<String> unZip(String zipFile, String outputFolder, boolean isDeleteOriginFile) {
 		byte[] buffer = new byte[1024];
-		ArrayList listFiles = new ArrayList();
+		ArrayList<String> listFiles = new ArrayList<String>();
 		try{
 			 
 	    	//create output directory is not exists
@@ -95,7 +95,7 @@ public class FileUtil {
 	 
 	    	   String fileName = ze.getName();
 	           File newFile = new File(outputFolder + File.separator + fileName);
-	           listFiles.add(newFile.getAbsoluteFile());
+	           listFiles.add(newFile.getAbsolutePath());
 	           
 	           logger.debug("file unzip : "+ newFile.getAbsoluteFile());
 	 
@@ -136,7 +136,7 @@ public class FileUtil {
 	 * @param outputFolder
 	 * @return 압축 해제한 파일들 경로
 	 */
-	public ArrayList unZip(String zipFile, String outputFolder) {
+	public ArrayList<String> unZip(String zipFile, String outputFolder) {
 		return unZip(zipFile, outputFolder, true);
 	}
 
