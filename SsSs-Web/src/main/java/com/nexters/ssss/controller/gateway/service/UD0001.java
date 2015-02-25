@@ -34,15 +34,14 @@ import com.nexters.ssss.util.sessionUtil;
 public class UD0001 implements serviceIf {
 	private static final Logger logger = LoggerFactory.getLogger(UD0001.class);
 
-	@Autowired
 	private SqlSession sqlsession;
-	
 	private static final boolean isNeedLogin = false;
 	private sessionUtil sessionutil;
 
 	@Override
 	public Map<String, Object> doFirst(HttpSession session, SqlSession sqlsession_gw, JSONObject reqData) {
 		sessionutil = new sessionUtil(session);
+		sqlsession = sqlsession_gw;
 		if(isNeedLogin){
 			sessionutil.isUserLogin();
 		}

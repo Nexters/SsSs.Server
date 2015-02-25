@@ -38,7 +38,6 @@ public class DAO_RECORD_Impl implements DAO_RECORD{
 	
 	@Override
 	public void add_record(DTO_RECORD record){
-		//이부분 수정해야됨// 작동안됨
 		sqlsession.insert("Record.add_record", record);
 	}
 	
