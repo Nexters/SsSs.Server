@@ -76,11 +76,13 @@ public class UD0001 implements serviceIf {
 			String strVoiceFilePath = (String)listFiles.get(0);
 			//파일 경로가 없을 경우 압축해제를 실패했거나 정상적으로 해당 액션이 안된 경우를 처리해준다.
 			if(strVoiceFilePath!=null) {
-				record.setFile_path(strVoiceFilePath);
+				record.setFile_nm(strVoiceFilePath);
 				record.setIs_file_yn("Y");
+				record.setIs_play_yn("Y");
 			} else {
-				record.setFile_path("");
+				record.setFile_nm("");
 				record.setIs_file_yn("N");
+				record.setIs_play_yn("N");
 			}
 			
 

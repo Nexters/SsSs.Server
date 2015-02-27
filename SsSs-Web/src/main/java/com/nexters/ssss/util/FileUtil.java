@@ -95,9 +95,9 @@ public class FileUtil {
 	 
 	    	   String fileName = ze.getName();
 	           File newFile = new File(outputFolder + File.separator + fileName);
-	           listFiles.add(newFile.getAbsolutePath());
+	           listFiles.add(newFile.getName());
 	           
-	           logger.debug("file unzip : "+ newFile.getAbsoluteFile());
+	           logger.debug("file unzip : "+ newFile.getName());
 	 
 	            //create all non exists folders
 	            //else you will hit FileNotFoundException for compressed folder

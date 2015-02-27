@@ -38,8 +38,9 @@
   		(
   			file_no
   			,usr_no
-  			,file_path
+  			,file_nm
   			,is_file_yn
+  			,is_play_yn
   			,ins_date
   			,ins_time
   		)
@@ -47,8 +48,9 @@
   		(
   			"getFileNo"()
   			,#{usr_no}
-  			,#{file_path}
+  			,#{file_nm}
   			,#{is_file_yn}
+  			,#{is_play_yn}
   			,TO_CHAR(current_timestamp,'YYYYMMDD')
   			,TO_CHAR(current_timestamp,'HH24MISS')
   		)

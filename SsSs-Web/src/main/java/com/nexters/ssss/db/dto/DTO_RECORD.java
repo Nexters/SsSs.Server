@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 public class DTO_RECORD {
 	private String file_no;
 	private String usr_no;
-	private String file_path;
+	private String file_nm;
+	private String is_play_yn;
 	private String is_file_yn;
 	private String ins_date;
 	private String ins_time;
@@ -20,17 +21,23 @@ public class DTO_RECORD {
 	public void setFile_no(String file_no) {
 		this.file_no = file_no;
 	}
+	public String getIs_play_yn() {
+		return is_play_yn;
+	}
+	public void setIs_play_yn(String is_play_yn) {
+		this.is_play_yn = is_play_yn;
+	}
 	public String getUsr_no() {
 		return usr_no;
 	}
 	public void setUsr_no(String usr_no) {
 		this.usr_no = usr_no;
 	}
-	public String getFile_path() {
-		return file_path;
+	public String getFile_nm() {
+		return file_nm;
 	}
-	public void setFile_path(String file_path) {
-		this.file_path = file_path;
+	public void setFile_nm(String file_nm) {
+		this.file_nm = file_nm;
 	}
 	public String getIs_file_yn() {
 		return is_file_yn;
