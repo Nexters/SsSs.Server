@@ -8,6 +8,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	<mvc:resources mapping ="/resources/**" location="/resources/"/>
+		
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven>
 	    <mvc:message-converters>
@@ -27,7 +29,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
+	
 	<context:component-scan base-package="com.nexters.ssss" />
 	
 </beans:beans>
